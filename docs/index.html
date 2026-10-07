@@ -1,9 +1,190 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Mahasiswa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #13131a;
+            --card: #1a1a25;
+            --accent1: #ff6b35;
+            --accent2: #7c3aed;
+            --accent3: #06d6a0;
+            --text: #f0f0f5;
+            --muted: #888899;
+            --border: rgba(255,255,255,0.07);
+            --glow1: rgba(255,107,53,0.15);
+            --glow2: rgba(124,58,237,0.15);
+        }
 
-@section('title', 'Portfolio - Mahasiswa')
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-@push('styles')
-<style>
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10,10,15,0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 2px;
+            background: var(--accent1);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover::after { width: 100%; }
+
+        main { padding-top: 70px; }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+
+        footer span { color: var(--accent1); }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent1);
+            background: rgba(255,107,53,0.1);
+            border: 1px solid rgba(255,107,53,0.3);
+            padding: 0.3rem 0.9rem;
+            border-radius: 999px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255,107,53,0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent1);
+            color: var(--accent1);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-up { animation: fadeUp 0.8s ease forwards; }
+    </style>
+    <style>
     #home {
         min-height: 100vh;
         display: flex;
@@ -394,13 +575,22 @@
         .nav-links { display: none; }
     }
 </style>
-@endpush
+</head>
+<body>
 
-@section('content')
+    <nav>
+        <a href="#home" class="nav-logo">portofolio</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-{{-- ═══════════════════════════════════
-     HERO
-════════════════════════════════════ --}}
+    <main>
+        
+
 <section class="section" id="home">
     <div class="container">
         <div class="hero-content">
@@ -437,15 +627,13 @@
     </div>
 </section>
 
-{{-- ═══════════════════════════════════
-     ABOUT
-════════════════════════════════════ --}}
+
 <section class="section" id="about">
     <div class="container">
         <div class="about-grid">
             <div class="about-image-wrap">
                 <div class="about-image-box">
-                    <img src="{{ asset('images/foto-saya.jpeg') }}"
+                    <img src="images/foto-saya.jpeg"
                          alt="Foto Saya"
                          style="widh:100%; height:100%; object-fit:cover; border-radius:20px; position:relative; z-index:1;">
                 </div>
@@ -490,9 +678,7 @@
     </div>
 </section>
 
-{{-- ═══════════════════════════════════
-     SKILLS
-════════════════════════════════════ --}}
+
 <section class="section" id="skills">
     <div class="container">
         <span class="section-tag">Skills</span>
@@ -501,36 +687,76 @@
         </h2>
 
         <div class="skills-grid">
-            @php
-            $skills = [
-                ['icon' => 'fa-html5', 'name' => 'HTML', 'level' => 90, 'label' => 'Expert'],
-                ['icon' => 'fa-css3-alt', 'name' => 'CSS', 'level' => 90, 'label' => 'Expert'],
-                ['icon' => 'fa-js', 'name' => 'JavaScript', 'level' => 78, 'label' => 'Advanced'],
-                ['icon' => 'fa-php', 'name' => 'PHP', 'level' => 75, 'label' => 'Advanced'],
-                ['icon' => 'fa-laravel', 'name' => 'Laravel', 'level' => 75, 'label' => 'Advanced'],
-                ['icon' => 'fa-react', 'name' => 'React.js', 'level' => 65, 'label' => 'Intermediate'],
-                ['icon' => 'fa-database', 'style' => 'fas', 'name' => 'MySQL', 'level' => 80, 'label' => 'Advanced'],
-                ['icon' => 'fa-figma', 'name' => 'Figma', 'level' => 70, 'label' => 'Intermediate'],
-            ];
-            @endphp
-
-            @foreach($skills as $skill)
-            <div class="skill-card">
-                <div class="skill-icon"><i class="{{ $skill['style'] ?? 'fab' }} {{ $skill['icon'] }}" aria-hidden="true"></i></div>
-                <div class="skill-name">{{ $skill['name'] }}</div>
+            
+                        <div class="skill-card">
+                <div class="skill-icon"><i class="fab fa-html5" aria-hidden="true"></i></div>
+                <div class="skill-name">HTML</div>
                 <div class="skill-bar-bg">
-                    <div class="skill-bar" style="width: {{ $skill['level'] }}%"></div>
+                    <div class="skill-bar" style="width: 90%"></div>
                 </div>
-                <div class="skill-level">{{ $skill['label'] }} — {{ $skill['level'] }}%</div>
+                <div class="skill-level">Expert — 90%</div>
             </div>
-            @endforeach
-        </div>
+                        <div class="skill-card">
+                <div class="skill-icon"><i class="fab fa-css3-alt" aria-hidden="true"></i></div>
+                <div class="skill-name">CSS</div>
+                <div class="skill-bar-bg">
+                    <div class="skill-bar" style="width: 90%"></div>
+                </div>
+                <div class="skill-level">Expert — 90%</div>
+            </div>
+                        <div class="skill-card">
+                <div class="skill-icon"><i class="fab fa-js" aria-hidden="true"></i></div>
+                <div class="skill-name">JavaScript</div>
+                <div class="skill-bar-bg">
+                    <div class="skill-bar" style="width: 78%"></div>
+                </div>
+                <div class="skill-level">Advanced — 78%</div>
+            </div>
+                        <div class="skill-card">
+                <div class="skill-icon"><i class="fab fa-php" aria-hidden="true"></i></div>
+                <div class="skill-name">PHP</div>
+                <div class="skill-bar-bg">
+                    <div class="skill-bar" style="width: 75%"></div>
+                </div>
+                <div class="skill-level">Advanced — 75%</div>
+            </div>
+                        <div class="skill-card">
+                <div class="skill-icon"><i class="fab fa-laravel" aria-hidden="true"></i></div>
+                <div class="skill-name">Laravel</div>
+                <div class="skill-bar-bg">
+                    <div class="skill-bar" style="width: 75%"></div>
+                </div>
+                <div class="skill-level">Advanced — 75%</div>
+            </div>
+                        <div class="skill-card">
+                <div class="skill-icon"><i class="fab fa-react" aria-hidden="true"></i></div>
+                <div class="skill-name">React.js</div>
+                <div class="skill-bar-bg">
+                    <div class="skill-bar" style="width: 65%"></div>
+                </div>
+                <div class="skill-level">Intermediate — 65%</div>
+            </div>
+                        <div class="skill-card">
+                <div class="skill-icon"><i class="fas fa-database" aria-hidden="true"></i></div>
+                <div class="skill-name">MySQL</div>
+                <div class="skill-bar-bg">
+                    <div class="skill-bar" style="width: 80%"></div>
+                </div>
+                <div class="skill-level">Advanced — 80%</div>
+            </div>
+                        <div class="skill-card">
+                <div class="skill-icon"><i class="fab fa-figma" aria-hidden="true"></i></div>
+                <div class="skill-name">Figma</div>
+                <div class="skill-bar-bg">
+                    <div class="skill-bar" style="width: 70%"></div>
+                </div>
+                <div class="skill-level">Intermediate — 70%</div>
+            </div>
+                    </div>
     </div>
 </section>
 
-{{-- ═══════════════════════════════════
-     PROJECTS
-════════════════════════════════════ --}}
+
 <section class="section" id="projects">
     <div class="container">
         <span class="section-tag">Projects</span>
@@ -539,70 +765,66 @@
         </h2>
 
         <div class="projects-grid">
-            @php
-            $projects = [
-                [
-                    'thumb' => 'project-thumb-1',
-                    'image' => 'images/debouquets-banner.jpeg',
-                    'tags' => [['JavaScript', ''], ['Figma', 'purple']],
-                    'title' => 'DeBouquets',
-                    'desc' => 'DeBouquets merupakan usaha yang bergerak pada bidang penjualan bouquet bunga dan layanan custom order',
-                    'platform' => 'figma',
-                    'link' => 'https://www.figma.com/file/3EHrChIRnCXbywhxvdHJiu/FigmaDeBouquets'
-                ],
-                [
-                    'thumb' => 'project-thumb-2',
-                    'image' => 'images/IShowKost-banner.jpeg',
-                    'tags' => [['CSS', ''], ['HTML', 'purple']],
-                    'title' => 'IShowKost',
-                    'desc' => 'IshowKost memanfaatkan teknologi untuk berkembang dari aplikasi cari kos menjadi aplikasi yang memudahkan calon anak kos untuk booking properti kos dan juga melakukan pembayaran kos.',
-                    'platform' => 'github',
-                    'link' => 'https://github.com/stickyfinger222/web-kos'
-                ],
-                [
-                    'thumb' => 'project-thumb-3',
-                    'image' => 'images/predatoria-banner.jpeg',
-                    'tags' => [['AR', ''], ['CSS', 'purple']],
-                    'title' => 'Predatoria',
-                    'desc' => 'Predatoria berangkat dari permasalahan dalam proses pembelajaran sains, khususnya dalam topik keanekaragaman hayati dan konservasi satwa liar, yang cenderung kurang diminati oleh siswa sekolah dasar.',
-                    'platform' => 'github',
-                    'link' => '#https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fbeni1412.github.io%2Fvirtual%2F&urlhash=ToZy&mt=NQ6L6kRRhjyC8HSk6mTg2jt-4iRASncawgfAlVuilx5xQnVN8iiQAER9yTWt_EFcVlxuz4gT9lkp_rBjdj8zSSJ0x_QO&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_media_list%3BqtyrtRo2SBWY6RTFHd3Jcw%3D%3Dhttps://beni1412.github.io/virtual/'
-                ],
-            ];
-            @endphp
-
-            @foreach($projects as $p)
-            <div class="project-card">
-                <div class="project-thumbnail {{ $p['thumb'] }}">
-    @if(isset($p['image']))
-        <img src="{{ asset($p['image']) }}" alt="{{ $p['title'] }}" style="width: 100%; height: 100%; object-fit: cover;">
-    @else
-        {{ $p['icon'] }}
-    @endif
-</div>
+            
+                        <div class="project-card">
+                <div class="project-thumbnail project-thumb-1">
+            <img src="images/debouquets-banner.jpeg" alt="DeBouquets" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
                 <div class="project-body">
                     <div class="project-tags">
-                        @foreach($p['tags'] as $t)
-                        <span class="tag {{ $t[1] }}">{{ $t[0] }}</span>
-                        @endforeach
-                    </div>
-                    <div class="project-title">{{ $p['title'] }}</div>
-                    <p class="project-desc">{{ $p['desc'] }}</p>
+                                                <span class="tag ">JavaScript</span>
+                                                <span class="tag purple">Figma</span>
+                                            </div>
+                    <div class="project-title">DeBouquets</div>
+                    <p class="project-desc">DeBouquets merupakan usaha yang bergerak pada bidang penjualan bouquet bunga dan layanan custom order</p>
                     <div class="project-links">
-                        <a href="{{ $p['link'] }}" class="project-link">
-                            <i class="fab fa-{{ $p['platform'] }}"></i> {{ ucfirst($p['platform']) }}
+                        <a href="https://www.figma.com/file/3EHrChIRnCXbywhxvdHJiu/FigmaDeBouquets" class="project-link">
+                            <i class="fab fa-figma"></i> Figma
                         </a>
                     </div>
                 </div>
             </div>
-            @endforeach
-        </div>
+                        <div class="project-card">
+                <div class="project-thumbnail project-thumb-2">
+            <img src="images/IShowKost-banner.jpeg" alt="IShowKost" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+                <div class="project-body">
+                    <div class="project-tags">
+                                                <span class="tag ">CSS</span>
+                                                <span class="tag purple">HTML</span>
+                                            </div>
+                    <div class="project-title">IShowKost</div>
+                    <p class="project-desc">IshowKost memanfaatkan teknologi untuk berkembang dari aplikasi cari kos menjadi aplikasi yang memudahkan calon anak kos untuk booking properti kos dan juga melakukan pembayaran kos.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/stickyfinger222/web-kos" class="project-link">
+                            <i class="fab fa-github"></i> Github
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="project-card">
+                <div class="project-thumbnail project-thumb-3">
+            <img src="images/predatoria-banner.jpeg" alt="Predatoria" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+                <div class="project-body">
+                    <div class="project-tags">
+                                                <span class="tag ">AR</span>
+                                                <span class="tag purple">CSS</span>
+                                            </div>
+                    <div class="project-title">Predatoria</div>
+                    <p class="project-desc">Predatoria berangkat dari permasalahan dalam proses pembelajaran sains, khususnya dalam topik keanekaragaman hayati dan konservasi satwa liar, yang cenderung kurang diminati oleh siswa sekolah dasar.</p>
+                    <div class="project-links">
+                        <a href="#https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fbeni1412.github.io%2Fvirtual%2F&amp;urlhash=ToZy&amp;mt=NQ6L6kRRhjyC8HSk6mTg2jt-4iRASncawgfAlVuilx5xQnVN8iiQAER9yTWt_EFcVlxuz4gT9lkp_rBjdj8zSSJ0x_QO&amp;isSdui=true&amp;lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_media_list%3BqtyrtRo2SBWY6RTFHd3Jcw%3D%3Dhttps://beni1412.github.io/virtual/" class="project-link">
+                            <i class="fab fa-github"></i> Github
+                        </a>
+                    </div>
+                </div>
+            </div>
+                    </div>
     </div>
 </section>
 
-{{-- ═══════════════════════════════════
-     CONTACT
-════════════════════════════════════ --}}
+
 <section class="section" id="contact">
     <div class="container">
         <span class="section-tag">Contact</span>
@@ -636,11 +858,14 @@
                     </a>
                 </div>
                 <footer>
-                    <p>© {{ date('Y') }} — dibuat dengan hati yang bahagia ;)</p>
+                    <p>© 2026 — dibuat dengan hati yang bahagia ;)</p>
                 </footer>
             </div>
         </div>
     </div>
 </section>
 
-@endsection
+    </main>
+
+</body>
+</html>
