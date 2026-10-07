@@ -202,9 +202,5 @@
         @yield('content')
     </main>
 
-    <footer>
-        <p>© {{ date('Y') }} — dibuat dengan hati yang bahagia ;) </p>
-    </footer>
-
 </body>
 </html>

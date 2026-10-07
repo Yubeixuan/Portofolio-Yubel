@@ -338,11 +338,13 @@
        CONTACT EHHEH
     ══════════════════════════════ */
     .contact-wrapper {
-        display: grid;
-        grid-template-columns: 1fr 1.5fr;
-        gap: 4rem;
+        display: flex;
+        justify-content: center;
         margin-top: 3rem;
-        align-items: start;
+    }
+
+    .contact-info {
+        width: min(100%, 560px);
     }
 
     .contact-info h3 {
@@ -382,45 +384,12 @@
     .contact-link:hover { color: var(--text); }
     .contact-link:hover i { border-color: var(--accent1); color: var(--accent1); }
 
-    /* Form */
-    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
-
-    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-
-    .form-group label {
-        font-size: 0.82rem;
-        font-weight: 500;
-        color: var(--muted);
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-    }
-
-    .form-group input,
-    .form-group textarea {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 0.9rem 1.2rem;
-        color: var(--text);
-        font-family: 'DM Sans', sans-serif;
-        font-size: 0.95rem;
-        transition: border-color 0.3s;
-        outline: none;
-        resize: none;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus { border-color: var(--accent1); }
-
-    .form-group input::placeholder,
-    .form-group textarea::placeholder { color: var(--muted); }
-
     /* ══════════════════════════════
        RESPONSIVE EHHEH
     ══════════════════════════════ */
     @media (max-width: 768px) {
-        .about-grid,
-        .contact-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
+        .about-grid { grid-template-columns: 1fr; }
+        .contact-wrapper { gap: 2.5rem; }
         .about-image-box { aspect-ratio: 3/2; }
         .nav-links { display: none; }
     }
@@ -446,8 +415,7 @@
             </h1>
 
             <p class="hero-subtitle">
-                Mahasiswa jurusan Computer Science yang suka membangun
-                solusi digital yang berdampak nyata.
+                Mahasiswa jurusan Computer Science yang suka berinteraksi dengan orang dalam bisnis terutama dalam finance.
             </p>
 
             <div class="hero-actions">
@@ -487,33 +455,33 @@
             <div class="about-text">
                 <span class="section-tag">About Me</span>
                 <h2 class="section-title">
-                    Seorang <span class="gradient-text">Pembangun</span><br>
+                    Seorang <span class="gradient-text">Mahasiswa</span><br>
                     yang Ingin Tahu
                 </h2>
                 <p style="color: var(--muted); margin-bottom: 1.5rem; line-height: 1.8;">
-                    Saya adalah mahasiswa semester 4 di Universitas Bina Nusantara dengan
-                    minat besar di bidang web development dan UI/UX. Saya percaya bahwa teknologi
+                    Saya adalah mahasiswa semester 5 di Universitas Bina Nusantara dengan
+                    minat besar di bidang web development, UI/UX, serta database. Saya percaya bahwa teknologi
                     terbaik adalah yang mudah digunakan dan berdampak positif bagi masyarakat.
                 </p>
                 <p style="color: var(--muted); line-height: 1.8;">
-                    Di luar kuliah, saya aktif membuka jasa joki tugas ke anak sma, lalu membuka jasa les tentang beberapa materi terkait Computer Science.
+                    Di luar kuliah, saya aktif membuka jasa membuat web kepada teman-teman saya yang sedang menjalankan usaha.
                 </p>
 
                 <div class="about-stats">
                     <div class="stat-card">
-                        <div class="stat-number">15+</div>
+                        <div class="stat-number">6</div>
                         <div class="stat-label">Projects Selesai</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">9</div>
-                        <div class="stat-label">Joki tugas</div>
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Bantu Tugas</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">2+</div>
                         <div class="stat-label">Tahun Belajar Coding</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">5★</div>
+                        <div class="stat-number">4.5★</div>
                         <div class="stat-label">Rating di Freelance</div>
                     </div>
                 </div>
@@ -535,18 +503,20 @@
         <div class="skills-grid">
             @php
             $skills = [
-                ['icon' => '🌐', 'name' => 'HTML & CSS', 'level' => 90, 'label' => 'Expert'],
-                ['icon' => '⚡', 'name' => 'JavaScript', 'level' => 78, 'label' => 'Advanced'],
-                ['icon' => '🐘', 'name' => 'PHP & Laravel', 'level' => 75, 'label' => 'Advanced'],
-                ['icon' => '⚛️', 'name' => 'React.js', 'level' => 65, 'label' => 'Intermediate'],
-                ['icon' => '🗄️', 'name' => 'MySQL', 'level' => 80, 'label' => 'Advanced'],
-                ['icon' => '🎨', 'name' => 'Figma / UI Design', 'level' => 70, 'label' => 'Intermediate'],
+                ['icon' => 'fa-html5', 'name' => 'HTML', 'level' => 90, 'label' => 'Expert'],
+                ['icon' => 'fa-css3-alt', 'name' => 'CSS', 'level' => 90, 'label' => 'Expert'],
+                ['icon' => 'fa-js', 'name' => 'JavaScript', 'level' => 78, 'label' => 'Advanced'],
+                ['icon' => 'fa-php', 'name' => 'PHP', 'level' => 75, 'label' => 'Advanced'],
+                ['icon' => 'fa-laravel', 'name' => 'Laravel', 'level' => 75, 'label' => 'Advanced'],
+                ['icon' => 'fa-react', 'name' => 'React.js', 'level' => 65, 'label' => 'Intermediate'],
+                ['icon' => 'fa-mysql', 'name' => 'MySQL', 'level' => 80, 'label' => 'Advanced'],
+                ['icon' => 'fa-figma', 'name' => 'Figma', 'level' => 70, 'label' => 'Intermediate'],
             ];
             @endphp
 
             @foreach($skills as $skill)
             <div class="skill-card">
-                <div class="skill-icon">{{ $skill['icon'] }}</div>
+                <div class="skill-icon"><i class="fab {{ $skill['icon'] }}" aria-hidden="true"></i></div>
                 <div class="skill-name">{{ $skill['name'] }}</div>
                 <div class="skill-bar-bg">
                     <div class="skill-bar" style="width: {{ $skill['level'] }}%"></div>
@@ -565,7 +535,7 @@
     <div class="container">
         <span class="section-tag">Projects</span>
         <h2 class="section-title">
-            Karya yang Pernah <span class="gradient-text">Saya Buat</span>
+            Proyek <span class="gradient-text">Pilihan Saya</span>
         </h2>
 
         <div class="projects-grid">
@@ -573,34 +543,43 @@
             $projects = [
                 [
                     'thumb' => 'project-thumb-1',
-                    'icon' => '🛒',
-                    'tags' => [['Laravel', ''], ['MySQL', 'purple']],
-                    'title' => 'E-Commerce App',
-                    'desc' => 'Aplikasi belanja online dengan fitur cart, checkout, dan manajemen produk berbasis Laravel 12.',
-                    'demo' => '#', 'github' => '#'
+                    'image' => 'images/debouquets-banner.jpeg',
+                    'tags' => [['JavaScript', ''], ['Figma', 'purple']],
+                    'title' => 'DeBouquets',
+                    'desc' => 'DeBouquets merupakan usaha yang bergerak pada bidang penjualan bouquet bunga dan layanan custom order',
+                    'platform' => 'figma',
+                    'link' => 'https://www.figma.com/file/3EHrChIRnCXbywhxvdHJiu/FigmaDeBouquets'
                 ],
                 [
                     'thumb' => 'project-thumb-2',
-                    'icon' => '📋',
-                    'tags' => [['React', ''], ['Node.js', 'purple']],
-                    'title' => 'Task Manager App',
-                    'desc' => 'Aplikasi manajemen tugas dengan drag-and-drop, kategori, dan reminder berbasis React.',
-                    'demo' => '#', 'github' => '#'
+                    'image' => 'images/IShowKost-banner.jpeg',
+                    'tags' => [['CSS', ''], ['HTML', 'purple']],
+                    'title' => 'IShowKost',
+                    'desc' => 'IshowKost memanfaatkan teknologi untuk berkembang dari aplikasi cari kos menjadi aplikasi yang memudahkan calon anak kos untuk booking properti kos dan juga melakukan pembayaran kos.',
+                    'platform' => 'github',
+                    'link' => 'https://github.com/stickyfinger222/web-kos'
                 ],
                 [
                     'thumb' => 'project-thumb-3',
-                    'icon' => '🌤️',
-                    'tags' => [['JavaScript', ''], ['API', 'purple']],
-                    'title' => 'Weather Dashboard',
-                    'desc' => 'Dashboard cuaca real-time menggunakan OpenWeather API dengan visualisasi data yang menarik.',
-                    'demo' => '#', 'github' => '#'
+                    'image' => 'images/predatoria-banner.jpeg',
+                    'tags' => [['AR', ''], ['CSS', 'purple']],
+                    'title' => 'Predatoria',
+                    'desc' => 'Predatoria berangkat dari permasalahan dalam proses pembelajaran sains, khususnya dalam topik keanekaragaman hayati dan konservasi satwa liar, yang cenderung kurang diminati oleh siswa sekolah dasar.',
+                    'platform' => 'github',
+                    'link' => '#https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fbeni1412.github.io%2Fvirtual%2F&urlhash=ToZy&mt=NQ6L6kRRhjyC8HSk6mTg2jt-4iRASncawgfAlVuilx5xQnVN8iiQAER9yTWt_EFcVlxuz4gT9lkp_rBjdj8zSSJ0x_QO&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_media_list%3BqtyrtRo2SBWY6RTFHd3Jcw%3D%3Dhttps://beni1412.github.io/virtual/'
                 ],
             ];
             @endphp
 
             @foreach($projects as $p)
             <div class="project-card">
-                <div class="project-thumbnail {{ $p['thumb'] }}">{{ $p['icon'] }}</div>
+                <div class="project-thumbnail {{ $p['thumb'] }}">
+    @if(isset($p['image']))
+        <img src="{{ asset($p['image']) }}" alt="{{ $p['title'] }}" style="width: 100%; height: 100%; object-fit: cover;">
+    @else
+        {{ $p['icon'] }}
+    @endif
+</div>
                 <div class="project-body">
                     <div class="project-tags">
                         @foreach($p['tags'] as $t)
@@ -610,11 +589,8 @@
                     <div class="project-title">{{ $p['title'] }}</div>
                     <p class="project-desc">{{ $p['desc'] }}</p>
                     <div class="project-links">
-                        <a href="{{ $p['demo'] }}" class="project-link">
-                            <i class="fas fa-external-link-alt"></i> Live Demo
-                        </a>
-                        <a href="{{ $p['github'] }}" class="project-link">
-                            <i class="fab fa-github"></i> GitHub
+                        <a href="{{ $p['link'] }}" class="project-link">
+                            <i class="fab fa-{{ $p['platform'] }}"></i> {{ ucfirst($p['platform']) }}
                         </a>
                     </div>
                 </div>
@@ -646,40 +622,23 @@
                         <i class="fas fa-envelope"></i>
                         Playstision7@gmail.com
                     </a>
-                    <a href="#" class="contact-link">
+                    <a href="https://www.linkedin.com/in/yubel-hakinen-joshua-lita-3978b6439" class="contact-link" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-linkedin"></i>
-                        Yubel Joshua
+                        Yubel Hakinen Joshua Lita
                     </a>
-                    <a href="#" class="contact-link">
+                    <a href="https://github.com/Yubeixuan" class="contact-link" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-github"></i>
                         Yubeixuan
                     </a>
-                    <a href="#" class="contact-link">
+                    <a href="https://www.instagram.com/yubeel_?stkn=MWtzejhhdGMyaW05YQ==" class="contact-link" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-instagram"></i>
                         @yubeel_
                     </a>
                 </div>
+                <footer>
+                    <p>© {{ date('Y') }} — dibuat dengan hati yang bahagia ;)</p>
+                </footer>
             </div>
-
-            <form action="{{ route('contact.send') }}" method="POST" class="contact-form">
-                @csrf
-                <div class="form-group">
-                    <label for="name">Nama</label>
-                    <input type="text" id="name" name="name" placeholder="Nama lengkap kamu" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="email@kamu.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Pesan</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Tulis pesanmu di sini..." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" style="align-self: flex-start;">
-                    <i class="fas fa-paper-plane"></i>
-                    Kirim Pesan
-                </button>
-            </form>
         </div>
     </div>
 </section>
